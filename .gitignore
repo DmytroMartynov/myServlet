@@ -1,0 +1,9 @@
+/hibernate.cfg.xml
+/local.properties
+/.gradle
+/build
+/out
+/.idea
+*iml
+local.properties
+hibernate.cfg.xml
