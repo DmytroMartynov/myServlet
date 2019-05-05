@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/")
-public class UserApi {
+public class StudentApi {
 
     private static StudentDao studentDao = new StudentDao();
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
