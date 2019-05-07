@@ -21,8 +21,7 @@ public class Student {
     @Column(name = "birth_date", nullable = false, unique = false)
     private Timestamp birthDate;
 
-    public Student() {
-    }
+
 
 
     public Student(String name, String birthInString) {
@@ -36,6 +35,22 @@ public class Student {
         }
         assert date != null;
         this.birthDate = new Timestamp(date.getTime());
+    }
+    public Student(int id, String name, String birthInString) {
+        this.id = id;
+        this.name = name;
+
+        Date date = null;
+        try {
+            date = formatter.parse(birthInString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.birthDate = new Timestamp(date.getTime());
+    }
+
+    public Student() {
+
     }
 
     public void setId(int id) {

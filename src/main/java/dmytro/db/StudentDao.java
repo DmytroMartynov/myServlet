@@ -17,7 +17,6 @@ import java.util.List;
 public class StudentDao {
 
     private SessionFactory sessionFactory;
-private int id = 0;
     public StudentDao() {
         java.util.Properties properties = new java.util.Properties();
         try {
@@ -77,7 +76,6 @@ private int id = 0;
     public void add(Student student) {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
-            student.setId(id++);
             session.save(student);
             transaction.commit();
         }

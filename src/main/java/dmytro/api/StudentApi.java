@@ -16,7 +16,7 @@ public class StudentApi {
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @GET
-    @Path("/test")
+    @Path("test")
     @Produces(MediaType.APPLICATION_JSON)
     public Response test() {
         Student student = new Student("Ivan", "2000-10-12");
@@ -59,10 +59,10 @@ public class StudentApi {
 
 
     @POST
-    @Path("add/{name}/{dataOfBirth}")
+    @Path("add/{name}/{birthInString}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addStudent(@PathParam("name") String name, @PathParam("dataOfBirth") String dataOfBirth ) {
-        Student student = new Student(name, dataOfBirth);
+    public Response add(@PathParam("name") String name, @PathParam("birthInString") String birthInString) {
+        Student student = new Student(name, birthInString);
         studentDao.add(student);
         String result = gson.toJson(student);
         return Response.status(Response.Status.OK).entity(result).build();
@@ -78,14 +78,13 @@ public class StudentApi {
         return Response.status(Response.Status.OK).entity(result).build();
     }
 
-    @DELETE
+    @PUT
     @Path("remove")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response remove(String inJson) {
-        Student student = gson.fromJson(inJson, Student.class);
-        studentDao.removeStudent(student);
-        String resultText = "Removed: " + student;
+    public Response remove(String inputJson) {
+        String resultText;
+            Student student = gson.fromJson(inputJson, Student.class);
+            studentDao.removeStudent(student);
+            resultText = "Removed: " + student;
         return Response.status(Response.Status.OK).entity(resultText).build();
     }
-
 }
